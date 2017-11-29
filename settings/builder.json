@@ -1,0 +1,28 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "encryptJs": true,
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": false,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": true,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "sheeppyfly",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "56dac6d2-7dd6-4ccf-bb02-e1b92998ea58",
+  "title": "sheeppyfly",
+  "webOrientation": "auto",
+  "xxteaKey": "37a07f8c-3815-41"
+}
