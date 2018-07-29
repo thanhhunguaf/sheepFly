@@ -24,5 +24,18 @@
   "startScene": "56dac6d2-7dd6-4ccf-bb02-e1b92998ea58",
   "title": "sheeppyfly",
   "webOrientation": "auto",
-  "xxteaKey": "37a07f8c-3815-41"
+  "xxteaKey": "37a07f8c-3815-41",
+  "zipCompressJs": true,
+  "wechatgame": {
+    "appid": "wx6ac3f5090a6b99c5",
+    "orientation": "portrait",
+    "REMOTE_SERVER_ROOT": "",
+    "subContext": "",
+    "isSubdomain": false
+  },
+  "qqplay": {
+    "orientation": "portrait",
+    "REMOTE_SERVER_ROOT": ""
+  },
+  "fb-instant-games": {}
 }
