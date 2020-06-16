@@ -1,10 +1,10 @@
 var State = cc.Enum({
-    None   : -1,
-    Run    : -1,
-    Jump   : -1,
-    Drop   : -1,
+    None: -1,
+    Run: -1,
+    Jump: -1,
+    Drop: -1,
     DropEnd: -1,
-    Dead   : -1
+    Dead: -1
 });
 
 var Dust = require('Dust');
@@ -25,7 +25,7 @@ var Sheep = cc.Class({
             get: function () {
                 return this._state;
             },
-            set: function(value){
+            set: function (value) {
                 if (value !== this._state) {
                     this._state = value;
                     if (this._state !== State.None) {
@@ -39,34 +39,34 @@ var Sheep = cc.Class({
         },
         jumpAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         dustPrefab: cc.Prefab
     },
     statics: {
         State: State
     },
-    init () {
+    init() {
         this.anim = this.getComponent(cc.Animation);
         this.currentSpeed = 0;
         this.sprite = this.getComponent(cc.Sprite);
         this.registerInput();
     },
-    startRun () {
+    startRun() {
         this.state = State.Run;
         this.enableInput(true);
     },
-    registerInput () {
+    registerInput() {
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function(keyCode, event) {
+            onKeyPressed: function (keyCode, event) {
                 this.jump();
             }.bind(this)
         }, this.node);
         // touch input
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            onTouchBegan: function(touch, event) {
+            onTouchBegan: function (touch, event) {
                 this.jump();
                 return true;
             }.bind(this)
@@ -80,7 +80,7 @@ var Sheep = cc.Class({
         }
     },
 
-    update (dt) {
+    update(dt) {
         switch (this.state) {
             case State.Jump:
                 if (this.currentSpeed < 0) {
@@ -106,7 +106,7 @@ var Sheep = cc.Class({
     },
 
     // invoked by animation
-    onDropFinished () {
+    onDropFinished() {
         this.state = State.Run;
     },
 
@@ -118,12 +118,11 @@ var Sheep = cc.Class({
                 this.state = Sheep.State.Dead;
                 D.game.gameOver();
                 this.enableInput(false);
-            }
-            else if (group === 'NextPipe') {
+            } else if (group === 'NextPipe') {
                 // jump over
                 D.game.gainScore();
             }
-       }
+        }
     },
 
     jump: function () {
@@ -132,13 +131,14 @@ var Sheep = cc.Class({
         cc.audioEngine.playEffect(this.jumpAudio);
         this.spawnDust('DustUp');
     },
-    spawnDust (animName) {
+    spawnDust(animName) {
         let dust = null;
-        if (cc.pool.hasObject(Dust)) {
-            dust = cc.pool.getFromPool(Dust);
+        if (cc.NodePool.get(Dust)) {
+            dust = cc.NodePool.get(Dust);
         } else {
             dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
         }
+        dust = cc.instantiate(this.dustPrefab).getComponent(Dust);
         this.node.parent.addChild(dust.node);
         dust.node.position = this.node.position;
         dust.playAnim(animName);

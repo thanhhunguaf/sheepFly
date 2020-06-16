@@ -6,13 +6,13 @@ cc.Class({
     },
 
     // use this for initialization
-    playAnim (animName) {
+    playAnim(animName) {
         this.anim.play(animName);
     },
 
-    finish () {
+    finish() {
         this.node.removeFromParent();
-        cc.pool.putInPool(this);
+        cc.NodePool.put(this);
     }
 
     // called every frame, uncomment this function to activate update callback

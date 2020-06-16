@@ -2,8 +2,8 @@ cc.Class({
     extends: cc.Component,
     properties: {
         speed: 0,
-        botYRange: cc.p(0, 0),
-        spacingRange: cc.p(0, 0),
+        botYRange: cc.v2(0, 0),
+        spacingRange: cc.v2(0, 0),
         topPipe: cc.Node,
         botPipe: cc.Node
     },

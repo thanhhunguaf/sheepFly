@@ -8,30 +8,32 @@ cc.Class({
         initPipeX: 0,
         spawnInterval: 0
     },
-    onLoad () {
+    onLoad() {
         D.pipeManager = this;
+        this.pipePool = new cc.NodePool('PipePool');
     },
-    startSpawn () {
+    startSpawn() {
         this.spawnPipe();
         this.schedule(this.spawnPipe, this.spawnInterval);
     },
-    spawnPipe () {
-        let pipeGroup = null;
-        if (cc.pool.hasObject(PipeGroup)) {
-            pipeGroup = cc.pool.getFromPool(PipeGroup);
-        } else {
-            pipeGroup = cc.instantiate(this.pipePrefab).getComponent(PipeGroup);
+    spawnPipe() {
+        let pipeGroup = this.pipePool.get();
+        if (!pipeGroup) {
+            let myPipe = cc.instantiate(this.pipePrefab);
+            this.pipePool.put(myPipe);
+            pipeGroup = myPipe;
+            this.pipeLayer.addChild(pipeGroup);
         }
-        this.pipeLayer.addChild(pipeGroup.node);
-        pipeGroup.node.active = true;
-        pipeGroup.node.x = this.initPipeX;
+        pipeGroup.active = true;
+        pipeGroup.x = this.initPipeX;
     },
-    despawnPipe (pipe) {
+    despawnPipe(pipe) {
         pipe.node.removeFromParent();
         pipe.node.active = false;
-        cc.pool.putInPool(pipe);
+        let myPipe = cc.instantiate(this.pipePrefab);
+        this.pipePool.put(myPipe);
     },
-    reset () {
+    reset() {
         this.unschedule(this.spawnPipe);
     }
 });

@@ -3,7 +3,7 @@ var Scroller = require('Scroller');
 
 var State = cc.Enum({
     Menu: -1,
-    Run : -1,
+    Run: -1,
     Over: -1
 });
 
@@ -15,19 +15,19 @@ var GameManager = cc.Class({
         scoreText: cc.Label,
         gameBgAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         dieAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         gameOverAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         scoreAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         }
     },
 
@@ -35,7 +35,7 @@ var GameManager = cc.Class({
         State
     },
 
-    onLoad () {
+    onLoad() {
         D.GameManager = GameManager;
         D.game = this;
 
@@ -48,13 +48,13 @@ var GameManager = cc.Class({
         this.gameOverMenu.active = false;
         this.sheep.init();
     },
-    start () {
+    start() {
         this.state = State.Run;
         this.score = 0;
         D.pipeManager.startSpawn();
         this.sheep.startRun();
     },
-    gameOver () {
+    gameOver() {
         cc.audioEngine.stopMusic(this.gameBgAudio);
         cc.audioEngine.playEffect(this.dieAudio);
         cc.audioEngine.playEffect(this.gameOverAudio);
@@ -63,7 +63,7 @@ var GameManager = cc.Class({
         this.gameOverMenu.active = true;
         this.gameOverMenu.getComponent('GameOverMenu').score.string = this.score;
     },
-    gainScore () {
+    gainScore() {
         this.score++;
         this.scoreText.string = this.score;
         cc.audioEngine.playEffect(this.scoreAudio);
